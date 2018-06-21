@@ -1,0 +1,60 @@
+@import "chatVariables.scss";
+
+.chatApp {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: yellow;
+}
+.navigation {
+  width: 20%;
+  height: 100%;
+  overflow: scroll;
+  background-color: #ffd34e;
+  display: flex;
+  flex-direction: column;
+}
+
+.chats {
+  overflow: scroll;
+}
+.chatHeader {
+  background: green;
+  display: flex;
+  direction: row;
+}
+
+.chatHeaderAction {
+  margin-left: auto;
+}
+.chatSettings {
+  background: red;
+}
+
+.content {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.chatMessages {
+  height: 100%;
+  overflow: scroll;
+  background: blueviolet;
+}
+
+.chatInputView {
+  display: flex;
+  flex-direction: row;
+}
+
+.chatScrollViewCell {
+  display: flex;
+  flex-direction: row-reverse nowrap;
+  width: 100%;
+  background-color: bisque;
+}
+.messageInfo {
+  margin-left: auto;
+}

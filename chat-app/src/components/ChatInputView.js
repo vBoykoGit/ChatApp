@@ -1,0 +1,25 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+const ChatInputView = ({ onNewMessage = f => f }) => {
+  let _messageText;
+  const onSubmit = form => {
+    form.preventDefault();
+    onNewMessage(_messageText.value);
+    _messageText.value = "";
+    _messageText.focus();
+  };
+  return (
+    <form className="chatInputView" onSubmit={onSubmit}>
+      <input
+        ref={input => (_messageText = input)}
+        type="text"
+        className="form-control"
+        placeholder="Type a message..."
+      />
+      <input type="submit" className="btn btn-light" value="Send" />
+    </form>
+  );
+};
+
+export default ChatInputView;
