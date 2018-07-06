@@ -1,5 +1,16 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { messages } from "./reducers";
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware
+} from "redux";
+import {
+  messages
+} from "./reducers";
+import {
+  user
+} from "./authReducers";
+import thunk from 'redux-thunk'
+
 
 let console = window.console;
 
@@ -20,12 +31,20 @@ const saver = store => next => action => {
   return result;
 };
 
-const storeFactory = (initialState = {}) =>
-  applyMiddleware(logger, saver)(createStore)(
-    combineReducers({ messages }),
-    localStorage["redux-store"]
-      ? JSON.parse(localStorage["redux-store"])
-      : initialState
-  );
+const middleware = () => [
+  logger, 
+  saver,
+  thunk
+]
+
+const storeFactory = (initialState = {}) => {
+  const store = applyMiddleware(...middleware())(createStore)(combineReducers({
+    messages,
+    user
+  }), localStorage["redux-store"] ? JSON.parse(localStorage["redux-store"]) : initialState);
+
+  console.log(store.getState());
+  return store
+}
 
 export default storeFactory;

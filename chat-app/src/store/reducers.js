@@ -15,7 +15,7 @@ export const message = (state = {}, action = { type: null }) => {
   }
 };
 
-export const messages = (state = {}, action = { type: null }) => {
+export const messages = (state = [], action = { type: null }) => {
   switch (action.type) {
     case C.SendMessage:
       return [...state, message({}, action)];

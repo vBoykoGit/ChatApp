@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import storeFactory from './store/store.js'
+import './css/App.css';
 
 const store = storeFactory()
 
@@ -15,7 +16,7 @@ window.store = store;
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
-      <App />
+        <App/>
     </HashRouter>
   </Provider>,
   document.getElementById("root")
