@@ -5,6 +5,7 @@ import {
     fetchThenDispatch
 } from './fetcher.js'
 import _ from 'lodash'
+import { history } from '../history/history.js';
 
 export const login = (email, password) => {
     return dispatch => {
@@ -20,8 +21,10 @@ export const login = (email, password) => {
                 password
             }), response => {
                 console.log(response);
-                const accessToken = _.get(response, 'data');
-                const user = _.get(accessToken, 'user');
+                const user = _.get(response, 'user');                
+                localStorage["user"] = JSON.stringify(user);
+                console.log("LOCALED");
+                
                 return success(user)
             })
     };
