@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { login } from '../../store/userActions.js';
+import { login,connectToChatSocket } from '../../store/userActions.js';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -33,6 +33,7 @@ class LoginPage extends React.Component {
         const { dispatch } = this.props;
         if (email && password) {
             dispatch(login(email, password));
+            dispatch(connectToChatSocket())
         }
     }
 
@@ -42,8 +43,6 @@ class LoginPage extends React.Component {
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
-                {                    console.log("Login", from , this.loggedIn)
-}
                 {                    
                     this.loggedIn ? <Redirect to={from} /> 
                     : <form name="form" onSubmit={this.handleSubmit}>

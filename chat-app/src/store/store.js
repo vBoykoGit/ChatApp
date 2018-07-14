@@ -6,10 +6,10 @@ import {
 import {
   messages
 } from "./reducers";
-import {
-  user
-} from "./authReducers";
+import user from "./authReducers.js";
+import socket from './socketReducer.js'
 import thunk from 'redux-thunk'
+import registration from './registrationReducer';
 
 
 let console = window.console;
@@ -39,8 +39,9 @@ const middleware = () => [
 
 const storeFactory = (initialState = {}) => {
   const store = applyMiddleware(...middleware())(createStore)(combineReducers({
-    messages,
-    user
+    socket,
+    user,
+    registration
   }), localStorage["redux-store"] ? JSON.parse(localStorage["redux-store"]) : initialState);
 
   console.log(store.getState());

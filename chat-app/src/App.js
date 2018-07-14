@@ -10,9 +10,7 @@ import { user } from './store/authReducers';
 import { history } from './history/history';
 
 class App extends Component {
-  render() {
-    console.log("APPPPPPP");
-    
+  render() {    
     return (
       <Router history = {history}>
         <div>

@@ -5,7 +5,9 @@ import {
     fetchThenDispatch
 } from './fetcher.js'
 import _ from 'lodash'
-import { history } from '../history/history.js';
+import {
+    history
+} from '../history/history.js';
 
 export const login = (email, password) => {
     return dispatch => {
@@ -20,11 +22,8 @@ export const login = (email, password) => {
                 email,
                 password
             }), response => {
-                console.log(response);
-                const user = _.get(response, 'user');                
+                const user = _.get(response, 'user');
                 localStorage["user"] = JSON.stringify(user);
-                console.log("LOCALED");
-                
                 return success(user)
             })
     };
@@ -69,7 +68,6 @@ export const register = (user) => {
                 email: user.email,
                 password: user.password
             }), response => {
-                console.log(response);
                 dispatch(success());
             })
     };
@@ -94,5 +92,35 @@ export const register = (user) => {
             type: userConstants.REGISTER_FAILURE,
             error
         }
+    }
+}
+
+export const connectToChatSocket = () => dispatch => {
+    dispatch({
+        type: 'CONNECTING'
+    })
+
+    let socket = new WebSocket('ws://localhost:3001')
+    socket.onerror = (event) => {
+
+        console.log("event", event);
+    }
+
+    socket.onclose = (event) => {
+
+        console.log("event", event);
+    }
+    socket.onmessage = (event) => {
+
+        console.log("event", event);
+    }
+
+    socket.onopen = (event) => {
+
+        socket.send(JSON.stringify({
+            action: 'create_message',
+            payload: {some: 'some'},
+        }))
+
     }
 }
