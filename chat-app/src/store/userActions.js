@@ -6,26 +6,26 @@ import {
 } from './fetcher.js'
 import _ from 'lodash'
 import {
-    history
-} from '../history/history.js';
+    connectToChatSocket
+} from './socketActions.js';
 
-export const login = (email, password) => {
+export function login(email, password) {
     return dispatch => {
         dispatch(request({
             email
         }));
 
-        fetchThenDispatch(dispatch,
-            'http://localhost:3001/api/users/login',
-            'POST',
+        fetchThenDispatch('http://localhost:3001/api/users/login', 'POST',
             JSON.stringify({
                 email,
                 password
-            }), response => {
-                const user = _.get(response, 'user');
-                localStorage["user"] = JSON.stringify(user);
-                return success(user)
             })
+        ).then((response) => {
+            const user = _.get(response, 'user');
+            localStorage.setItem("user", JSON.stringify(response))
+            dispatch(success(user))
+            dispatch(connectToChatSocket())
+        })
     };
 
     function request(user) {
@@ -50,14 +50,7 @@ export const login = (email, password) => {
     }
 }
 
-// function logout() {
-//     userService.logout();
-//     return {
-//         type: userConstants.LOGOUT
-//     };
-// }
-
-export const register = (user) => {
+export function register(user) {
     return dispatch => {
         dispatch(request(user));
         fetchThenDispatch(dispatch,
@@ -67,9 +60,7 @@ export const register = (user) => {
                 name: user.name,
                 email: user.email,
                 password: user.password
-            }), response => {
-                dispatch(success());
-            })
+            })).then(response => dispatch(success()))
     };
 
 
@@ -92,35 +83,5 @@ export const register = (user) => {
             type: userConstants.REGISTER_FAILURE,
             error
         }
-    }
-}
-
-export const connectToChatSocket = () => dispatch => {
-    dispatch({
-        type: 'CONNECTING'
-    })
-
-    let socket = new WebSocket('ws://localhost:3001')
-    socket.onerror = (event) => {
-
-        console.log("event", event);
-    }
-
-    socket.onclose = (event) => {
-
-        console.log("event", event);
-    }
-    socket.onmessage = (event) => {
-
-        console.log("event", event);
-    }
-
-    socket.onopen = (event) => {
-
-        socket.send(JSON.stringify({
-            action: 'create_message',
-            payload: {some: 'some'},
-        }))
-
     }
 }

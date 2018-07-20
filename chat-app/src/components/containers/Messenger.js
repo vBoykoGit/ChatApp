@@ -9,7 +9,7 @@ const Messenger = connect(
   dispatch => ({
     onNewMessage(messageText, toChatId, fromUser) {
       console.log(messageText);
-      dispatch(sendMessage(messageText, toChatId, fromUser));
+      //dispatch(sendMessage(messageText, toChatId, fromUser));
     }
   })
 )(ChatField);

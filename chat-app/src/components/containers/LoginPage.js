@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { login,connectToChatSocket } from '../../store/userActions.js';
+import { login } from '../../store/userActions.js';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -24,7 +24,6 @@ class LoginPage extends React.Component {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
-
     handleSubmit(e) {
         e.preventDefault();
 
@@ -33,7 +32,6 @@ class LoginPage extends React.Component {
         const { dispatch } = this.props;
         if (email && password) {
             dispatch(login(email, password));
-            dispatch(connectToChatSocket())
         }
     }
 

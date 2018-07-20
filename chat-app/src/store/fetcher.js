@@ -7,7 +7,7 @@ const parseToJson = response => {
 
 const logError = error => console.error(error)
 
-export const fetchThenDispatch = (dispatch, url, method, body, parseResponse) =>
+export const fetchThenDispatch = (url, method, body) =>
     fetch(url, {
         method,
         body,
@@ -16,6 +16,4 @@ export const fetchThenDispatch = (dispatch, url, method, body, parseResponse) =>
         }
     })
     .then(parseToJson)
-    .then(parseResponse)
-    .then(dispatch)
     .catch(logError)

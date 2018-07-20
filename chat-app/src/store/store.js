@@ -10,20 +10,11 @@ import user from "./authReducers.js";
 import socket from './socketReducer.js'
 import thunk from 'redux-thunk'
 import registration from './registrationReducer';
-
+import { createLogger } from 'redux-logger'
 
 let console = window.console;
 
-const logger = store => next => action => {
-  let result;
-  console.groupCollapsed("dispatching", action.type);
-  console.log("prev state", store.getState());
-  console.log("action", action);
-  result = next(action);
-  console.log("next state", store.getState());
-  console.groupEnd();
-  return result;
-};
+const loggerMiddleware = createLogger();
 
 const saver = store => next => action => {
   let result = next(action);
@@ -32,9 +23,9 @@ const saver = store => next => action => {
 };
 
 const middleware = () => [
-  logger, 
+  thunk,
+  loggerMiddleware, 
   saver,
-  thunk
 ]
 
 const storeFactory = (initialState = {}) => {
