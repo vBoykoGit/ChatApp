@@ -6,7 +6,6 @@ import { RegisterPage } from './components/containers/RegisterPage.js';
 import { LoginPage } from './components/containers/LoginPage.js';
 import { HashRouter, Router, Route, Switch } from "react-router-dom";
 import { connect } from 'react-redux';
-import { user } from './store/authReducers';
 import { history } from './history/history';
 
 class App extends Component {

@@ -12,12 +12,12 @@ const user = (state = initialState, action = {
     case userConstants.LOGIN_REQUEST:
       return {
         loggingIn: true,
-        user: action.user
+        userInfo: action.user
       };
     case userConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        user: action.user
+        userInfo: action.user
       };
     case userConstants.LOGIN_FAILURE:
       return {};

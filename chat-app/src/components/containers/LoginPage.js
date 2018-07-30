@@ -71,7 +71,7 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { _id } = state.user;
+    const { _id } = state.user.userInfo;
     return {
         _id
     };

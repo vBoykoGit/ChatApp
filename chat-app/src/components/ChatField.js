@@ -9,7 +9,8 @@ const ChatField = ({ messages = [], onNewMessage = f => f }) => {
     <div className="content">
       <ChatHeader />
       <ChatMessages />
-      <ChatInputView onNewMessage={messageText => onNewMessage(messageText, 1, {name: 'Vasya'})} />
+      <ChatInputView onSend={messageText => {
+        onNewMessage(messageText)}} />
     </div>
   );
 };

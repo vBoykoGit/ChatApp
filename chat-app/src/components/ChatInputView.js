@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ChatInputView = ({ onNewMessage = f => f }) => {
+const ChatInputView = ({ onSend = f => f }) => {
   let _messageText;
   const onSubmit = form => {
     form.preventDefault();
-    onNewMessage(_messageText.value);
+    onSend(_messageText.value);
     _messageText.value = "";
     _messageText.focus();
   };
