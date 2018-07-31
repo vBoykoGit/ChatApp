@@ -1,6 +1,6 @@
 import {
     socketConstants
-} from './socketConstants';
+} from '../constants/socketConstants';
 
 const socket = (state = {}, action = {
     type: null

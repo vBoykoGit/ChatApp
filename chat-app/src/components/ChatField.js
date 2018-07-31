@@ -1,5 +1,4 @@
-import React, { Component } from "../../../../Library/Caches/typescript/2.9/node_modules/@types/react/../../Library/Caches/typescript/2.9/node_modules/@types/react";
-import PropTypes from "../../../../Library/Caches/typescript/2.9/node_modules/@types/prop-types./Library/Caches/typescript/2.9/node_modules/@types/prop-types";
+import React from "react";
 import ChatHeader from "./ChatHeader"
 import ChatMessages from "./ChatMessages"
 import ChatInputView from "./ChatInputView"

@@ -1,4 +1,4 @@
-import React, { Component } from "../../../../Library/Caches/typescript/2.9/node_modules/@types/react/../../Library/Caches/typescript/2.9/node_modules/@types/react";
+import React, { Component } from "react";
 import "../css/chat.css";
 import Navigation from "./Navigation"
 import Messenger from "./containers/Messenger"

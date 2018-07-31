@@ -7,9 +7,9 @@ import {
   messages
 } from "./reducers";
 import user from "./reducers/userReducers.js";
-import socket from './socketReducer.js'
+import socket from './reducers/socketReducer.js'
 import thunk from 'redux-thunk'
-import registration from './registrationReducer';
+import registration from './reducers/registrationReducer';
 import { createLogger } from 'redux-logger'
 
 let console = window.console;

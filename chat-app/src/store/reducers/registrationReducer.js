@@ -1,6 +1,6 @@
 import {
     userConstants
-} from './userConstants.js';
+} from '../constants/userConstants.js';
 
 const registration = (state = {}, action = {
     type: null

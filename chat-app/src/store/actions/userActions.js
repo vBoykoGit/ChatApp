@@ -3,7 +3,7 @@ import {
 } from '../constants/userConstants.js';
 import {
     fetchThenDispatch
-} from './fetcher.js'
+} from '../fetcher.js'
 import _ from 'lodash'
 import {
     connectToChatSocket

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import { login } from '../../store/userActions.js';
+import { login } from '../../store/actions/userActions.js';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -71,7 +70,7 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { _id } = state.user.userInfo;
+    const { _id } = state.user.userInfo ? state.user.userInfo : '';
     return {
         _id
     };
