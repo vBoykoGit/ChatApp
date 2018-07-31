@@ -1,8 +1,7 @@
-import C from "./constants.js";
 
 export const message = (state = {}, action = { type: null }) => {
   switch (action.type) {
-    case C.SendMessage:
+    case 'C.SendMessage':
       return {
         id: action.id,
         timestamp: action.timestamp,
@@ -17,7 +16,7 @@ export const message = (state = {}, action = { type: null }) => {
 
 export const messages = (state = [], action = { type: null }) => {
   switch (action.type) {
-    case C.SendMessage:
+    case 'C.SendMessage':
       return [...state, message({}, action)];
     default:
       return state;

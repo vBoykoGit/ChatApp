@@ -1,6 +1,6 @@
 import {
     userConstants
-} from './userConstants.js';
+} from '../constants/userConstants.js';
 import {
     fetchThenDispatch
 } from './fetcher.js'

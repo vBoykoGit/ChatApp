@@ -6,7 +6,7 @@ import {
 import {
   messages
 } from "./reducers";
-import user from "./authReducers.js";
+import user from "./reducers/userReducers.js";
 import socket from './socketReducer.js'
 import thunk from 'redux-thunk'
 import registration from './registrationReducer';

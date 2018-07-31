@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import { register } from '../../store/userActions.js';
-import { user } from '../../store/authReducers';
+import { register } from '../../store/actions/userActions'
 
 class RegisterPage extends React.Component {
     constructor(props) {

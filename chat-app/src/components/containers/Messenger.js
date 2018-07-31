@@ -4,7 +4,7 @@ import {
 } from "react-redux";
 import {
   sendMessage
-} from "/Users/admin/Chat/chat-app/src/store/socketActions.js";
+} from "../../store/actions/socketActions";
 import ChatField from "../ChatField";
 import {
   message

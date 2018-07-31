@@ -1,19 +1,13 @@
 import {
     socketConstants
-} from './socketConstants.js';
-import {
-    authHeader
-} from '../helpers/authHeader';
+} from '../constants/socketConstants.js';
 import {
     token
-} from '../helpers/token.js'
+} from '../../helpers/token.js'
 import _ from 'lodash'
 import {
-    message
-} from './reducers';
-import {
     ObjectID
-} from '../helpers/objectid'
+} from '../../helpers/objectid.js'
 
 export function connectToChatSocket() {
     return dispatch => {

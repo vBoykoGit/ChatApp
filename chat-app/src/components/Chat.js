@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from "../../../../Library/Caches/typescript/2.9/node_modules/@types/react/../../Library/Caches/typescript/2.9/node_modules/@types/react";
 import "../css/chat.css";
-import Navigation from "./Navigation.js";
-import Messenger from "./containers/Messenger.js";
+import Navigation from "./Navigation"
+import Messenger from "./containers/Messenger"
 import "bootstrap/dist/css/bootstrap.css";
 
 export default class Chat extends Component {

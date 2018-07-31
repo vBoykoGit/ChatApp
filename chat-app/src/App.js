@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Chat from "./components/Chat";
 import "./css/App.css";
-import { PrivateRoute } from './components/PrivateRoute.js';
-import { RegisterPage } from './components/containers/RegisterPage.js';
-import { LoginPage } from './components/containers/LoginPage.js';
-import { HashRouter, Router, Route, Switch } from "react-router-dom";
+import { PrivateRoute } from './components/PrivateRoute'
+import { RegisterPage } from './components/containers/RegisterPage'
+import { LoginPage } from './components/containers/LoginPage'
+import { Router, Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import { history } from './history/history';
 
