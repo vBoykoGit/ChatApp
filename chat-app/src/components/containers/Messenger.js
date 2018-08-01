@@ -11,11 +11,9 @@ import {
 } from '../../store/reducers';
 
 const mapStateToProps = ({
-  messages,
-  socket
+  messages
 }) => ({
-  messages,
-  socket
+  messages
 })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
@@ -24,20 +22,18 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   console.log('ownProps', ownProps);
   const {
     messages,
-    socket,
     user
   } = stateProps;
   const {
     dispatch
   } = dispatchProps;
-  const onMessage = (messageText, chatID, user, socket) => {
-    dispatch(sendMessage(messageText, chatID, user, socket));
+  const onMessage = (messageText, chatID, user) => {
+    dispatch(sendMessage(messageText, chatID, user));
   };
   return {
     messages,
-    socket,
     onNewMessage: (messageText) => {
-      onMessage(messageText, "", user.userInfo, socket);
+      onMessage(messageText, "", user.userInfo);
     }
   };
 };

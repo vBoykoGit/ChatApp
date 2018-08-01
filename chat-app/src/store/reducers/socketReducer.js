@@ -12,7 +12,6 @@ const socket = (state = {}, action = {
             };
         case socketConstants.ConnectSuccess:
             return {
-                socket: action.socket,
                 connected: true
             };
         case socketConstants.ConnectFailure:
@@ -21,19 +20,16 @@ const socket = (state = {}, action = {
             };
         case socketConstants.AuthRequest:
             return {
-                socket: state.socket,
                 connected: true,
                 loggingIn: true
             };
         case socketConstants.AuthSuccess:
             return {
-                socket: state.socket,
                 connected: true,
                 loggedIn: true
             };
         case socketConstants.AuthFailure:
             return {
-                socket: state.socket,
                 connected: state.connected,
                 loggedIn: false
             };

@@ -10,7 +10,9 @@ import user from "./reducers/userReducers.js";
 import socket from './reducers/socketReducer.js'
 import thunk from 'redux-thunk'
 import registration from './reducers/registrationReducer';
-import { createLogger } from 'redux-logger'
+import {
+  createLogger
+} from 'redux-logger'
 
 let console = window.console;
 
@@ -24,7 +26,7 @@ const saver = store => next => action => {
 
 const middleware = () => [
   thunk,
-  loggerMiddleware, 
+  loggerMiddleware,
   saver,
 ]
 

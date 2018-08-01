@@ -8,26 +8,29 @@ import _ from 'lodash'
 import {
     ObjectID
 } from '../../helpers/objectid.js'
+import socketProvider from '../webSocket.js';
 
 export function connectToChatSocket() {
     return dispatch => {
         dispatch(connectRequest())
 
-        let socket = new WebSocket('ws://localhost:3001')
-        socket.onerror = (event) => {
+        socketProvider.connect()
+        console.log('socket', socketProvider);
+
+        socketProvider.socket.onerror = (event) => {
 
         }
 
-        socket.onclose = (event) => {
+        socketProvider.socket.onclose = (event) => {
             dispatch(disconnect(event))
         }
 
-        socket.onopen = (event) => {
-            dispatch(connectSuccess(socket))
-            dispatch(loginChatSocket(socket))
+        socketProvider.socket.onopen = (event) => {
+            dispatch(connectSuccess())
+            dispatch(loginChatSocket())
         }
 
-        socket.onmessage = (event) => {
+        socketProvider.socket.onmessage = (event) => {
             console.log("Mesage from the server: ", event.data);
             dispatch(readMessage(_.get(event, 'data')))
         }
@@ -39,10 +42,9 @@ export function connectToChatSocket() {
         }
     }
 
-    function connectSuccess(socket) {
+    function connectSuccess() {
         return {
             type: socketConstants.ConnectSuccess,
-            socket
         }
     }
 
@@ -61,10 +63,10 @@ export function connectToChatSocket() {
     }
 }
 
-function loginChatSocket(socket) {
+function loginChatSocket() {
     return dispatch => {
         dispatch(authRequest())
-        socket.send(JSON.stringify({
+        socketProvider.socket.send(JSON.stringify({
             action: 'auth',
             payload: `${token()}`
         }))
@@ -77,7 +79,7 @@ function loginChatSocket(socket) {
     }
 }
 
-export const sendMessage = (message, toChatId, fromUser, socket) => {
+export const sendMessage = (message, toChatId, fromUser) => {
     return dispatch => {
 
         const message = {
@@ -97,7 +99,7 @@ export const sendMessage = (message, toChatId, fromUser, socket) => {
             }
         }
 
-        socket.send(JSON.stringify({
+        socketProvider.socket.send(JSON.stringify({
             action: 'create_message',
             payload: `${token()}`
         }))
