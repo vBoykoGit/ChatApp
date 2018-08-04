@@ -10,9 +10,11 @@ import user from "./reducers/userReducers.js";
 import socket from './reducers/socketReducer.js'
 import thunk from 'redux-thunk'
 import registration from './reducers/registrationReducer';
+import search from './reducers/searchReducer'
 import {
   createLogger
 } from 'redux-logger'
+import chat from './reducers/chatReducer'
 
 let console = window.console;
 
@@ -34,7 +36,9 @@ const storeFactory = (initialState = {}) => {
   const store = applyMiddleware(...middleware())(createStore)(combineReducers({
     socket,
     user,
-    registration
+    registration,
+    search,
+    chat
   }), localStorage["redux-store"] ? JSON.parse(localStorage["redux-store"]) : initialState);
 
   console.log(store.getState());

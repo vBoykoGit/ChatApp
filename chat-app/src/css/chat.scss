@@ -1,5 +1,4 @@
 @import "chatVariables.scss";
-
 .chatApp {
   height: 100%;
   width: 100%;
@@ -7,6 +6,7 @@
   flex-direction: row;
   background: yellow;
 }
+
 .navigation {
   width: 20%;
   height: 100%;
@@ -19,6 +19,7 @@
 .chats {
   overflow: scroll;
 }
+
 .chatHeader {
   background: green;
   display: flex;
@@ -28,6 +29,7 @@
 .chatHeaderAction {
   margin-left: auto;
 }
+
 .chatSettings {
   background: red;
 }
@@ -38,6 +40,7 @@
   display: flex;
   flex-direction: column;
 }
+
 .chatMessages {
   height: 100%;
   overflow: scroll;
@@ -55,6 +58,7 @@
   width: 100%;
   background-color: bisque;
 }
+
 .messageInfo {
   margin-left: auto;
 }

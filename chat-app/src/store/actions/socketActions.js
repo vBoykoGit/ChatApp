@@ -79,13 +79,13 @@ function loginChatSocket() {
     }
 }
 
-export const sendMessage = (message, toChatId, fromUser) => {
+export const sendMessage = (messageText, toChatId) => {
     return dispatch => {
 
         const message = {
             _id: new ObjectID().toString(),
             channelId: toChatId,
-            body: message,
+            body: messageText,
             userId: token(),
             me: true,
         };
