@@ -2,20 +2,28 @@ import {
     searchConstants
 } from '../constants/searchConstants';
 
-const search = (state = {}, action = {
+const search = (state = {
+    foundChannels: [],
+    isSearching: false
+}, action = {
     type: null
 }) => {
     switch (action.type) {
-        case searchConstants.USERS_FOUND:
+        case searchConstants.CHANNELS_FOUND:
+            console.log("reduce", action);
+
             return {
-                foundUsers: action.users,
-                isSearching: state.isSearching
+                ...state,
+                foundChannels: action.channels
             };
         case searchConstants.SEARCH_CHANGED:
-            return {
-                foundUsers: [],
+            return action.isSearching ? {
+                foundChannels: state.foundChannels,
                 isSearching: action.isSearching
-            };
+            } : {
+                    foundChannels: [],
+                    isSearching: action.isSearching
+                }
         default:
             return state
     }

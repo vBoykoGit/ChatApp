@@ -16,18 +16,19 @@ const ChatField = ({ channel = {}, onNewMessage = f => f }) => {
       <ChatHeader />
       <ChatMessages />
       <ChatInputView onSend={messageText => {
-        onNewMessage(messageText)}} />
+        onNewMessage(messageText)
+      }} />
     </div>
   );
 };
 
 const mapStateToProps = ({
   chat
-},{ match }) => ({
+}, { match }) => ({
   channel: chat.channels.filter(item => item.id === match.params.id)
 })
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {  
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
     messages
   } = stateProps;

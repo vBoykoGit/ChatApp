@@ -39,7 +39,7 @@ const storeFactory = (initialState = {}) => {
     registration,
     search,
     chat
-  }), localStorage["redux-store"] ? JSON.parse(localStorage["redux-store"]) : initialState);
+  }), initialState);
 
   console.log(store.getState());
   return store

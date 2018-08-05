@@ -6,28 +6,36 @@ import {
 } from '../fetcher.js'
 import _ from 'lodash'
 
-export function searchChannels(query) {
+export function searchChannels(query = '') {
     return dispatch => {
-        fetchThenDispatch('http://localhost:3001/api/users/search', 'POST',
-            JSON.stringify({
-                search: query
+        if (query.length) {
+            dispatch(isSearching(true))
+            fetchThenDispatch('http://localhost:3001/api/users/search', 'POST',
+                JSON.stringify({
+                    search: query
+                })
+            ).then((response) => {
+                _.each(response, (channel) => {
+                    const channelId = `${channel._id}`;
+                });
+                dispatch(searchResult(response))
             })
-        ).then((response) => {
-            console.log(response);
-            
-            const channels = _.get(response, 'data', [])
-            _.each(channels, (channel) => {
-                channel.avatar = this.loadUserAvatar(channel);
-                const channelId = `${channel._id}`;
-            });
-            dispatch(searchResult(channels))
-        })
+        } else {
+            dispatch(isSearching(false))
+        }
     };
 
     function searchResult(channels) {
         return {
             type: searchConstants.CHANNELS_FOUND,
             channels
+        }
+    }
+
+    function isSearching(isSearching) {
+        return {
+            type: searchConstants.SEARCH_CHANGED,
+            isSearching
         }
     }
 }
