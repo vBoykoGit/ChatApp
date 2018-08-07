@@ -10,27 +10,34 @@ import {
   sendMessage
 } from "../../store/actions/socketActions";
 
-const ChatField = ({ channel = {}, onNewMessage = f => f }) => {
-  return (
-    <div className="content">
-      <ChatHeader />
-      <ChatMessages />
-      <ChatInputView onSend={messageText => {
-        onNewMessage(messageText)
-      }} />
-    </div>
-  );
-};
+const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
+  <div className="content">
+    <ChatHeader chatName={channel.name} />
+    <ChatMessages />
+    <ChatInputView onSend={messageText => {
+      onNewMessage(messageText)
+    }} />
+  </div>
 
 const mapStateToProps = ({
-  chat
-}, { match }) => ({
-  channel: chat.channels.filter(item => item.id === match.params.id)
-})
+  chat,
+  search,
+  messages
+}, { match }) => {
+  return {
+    chat,
+    search,
+    match,
+    messages
+  }
+}
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
-    messages
+    messages,
+    chat,
+    search,
+    match
   } = stateProps;
   const {
     dispatch
@@ -38,7 +45,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const onMessage = (messageText, chatID) => {
     dispatch(sendMessage(messageText, chatID));
   };
+  const [channel] = (search.isSearching) ? search.foundChannels.filter(item => item._id === match.params.id) : chat.channels.filter(item => item._id === match.params.id)
+
   return {
+    channel,
     messages,
     onNewMessage: (messageText) => {
       onMessage(messageText, ownProps.match.params.id);

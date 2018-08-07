@@ -13,7 +13,7 @@ const Chats = ({ isSearching, foundChannels, channels, history }) =>
       }
       }> {channel.name} </p>
     ) : channels.map(channel =>
-      <h1> {channel.name} </h1>
+      <p> {channel.name} </p>
     )}
   </div>
 
