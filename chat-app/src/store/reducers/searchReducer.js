@@ -10,8 +10,6 @@ const search = (state = {
 }) => {
     switch (action.type) {
         case searchConstants.CHANNELS_FOUND:
-            console.log("reduce", action);
-
             return {
                 ...state,
                 foundChannels: action.channels

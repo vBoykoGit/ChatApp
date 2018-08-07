@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import "../css/chat.css";
-import { Navigation } from "./Navigation"
+import { Navigation } from "./containers/Navigation"
 import { ChatField } from './containers/ChatField';
+import {
+  connect
+} from "react-redux"
+import { withRouter } from 'react-router'
 
-export default class Chat extends Component {
+class Chat extends Component {
   constructor(props) {
     super(props);
 
@@ -39,3 +43,17 @@ export default class Chat extends Component {
     );
   }
 }
+
+const mapStateToProps = ({
+  search,
+  chat
+}) => ({
+  isSearching: search.isSearching,
+  foundChannels: search.foundChannels,
+  channels: chat.channels
+}
+  )
+
+const connectedChat = withRouter(connect(mapStateToProps, null)(Chat))
+
+export { connectedChat as Chat }

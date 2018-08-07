@@ -1,10 +1,11 @@
 import React from "react";
-import { ChatSettings } from "./containers/ChatSettings";
+import { ChatSettings } from "./ChatSettings";
 import { Chats } from "./Chats.js";
 import {
   connect
 } from "react-redux"
-import { searchChannels } from '../store/actions/searchActions';
+import { searchChannels } from '../../store/actions/searchActions';
+import { withRouter } from 'react-router'
 
 const Navigation = ({ onChange }) => {
   return (
@@ -22,6 +23,6 @@ const mapDispatchToProps = dispatch =>
     }
   })
 
-const connectedNavigation = connect(null, mapDispatchToProps)(Navigation);
+const connectedNavigation = withRouter(connect(null, mapDispatchToProps)(Navigation))
 
 export { connectedNavigation as Navigation }
