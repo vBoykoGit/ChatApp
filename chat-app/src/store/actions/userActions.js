@@ -53,9 +53,7 @@ export function login(email, password) {
 export function register(user) {
     return dispatch => {
         dispatch(request(user));
-        fetchThenDispatch(dispatch,
-            'http://localhost:3001/api/users',
-            'POST',
+        fetchThenDispatch('http://localhost:3001/api/users', 'POST',
             JSON.stringify({
                 name: user.name,
                 email: user.email,

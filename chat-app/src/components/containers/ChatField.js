@@ -8,7 +8,7 @@ import {
 import { withRouter } from 'react-router'
 import {
   sendMessage
-} from "../../store/actions/socketActions";
+} from "../../store/actions/chatActions";
 
 const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
   <div className="content">

@@ -4,7 +4,6 @@ import {
 import {
     fetchThenDispatch
 } from '../fetcher.js'
-import _ from 'lodash'
 
 export function searchChannels(query = '') {
     return dispatch => {
@@ -15,9 +14,6 @@ export function searchChannels(query = '') {
                     search: query
                 })
             ).then((response) => {
-                _.each(response, (channel) => {
-                    const channelId = `${channel._id}`;
-                });
                 dispatch(searchResult(response))
             })
         } else {

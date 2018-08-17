@@ -8,12 +8,12 @@ import { withRouter } from 'react-router'
 const Chats = ({ isSearching, foundChannels, channels, history }) =>
   <div className="chats">
     {(isSearching) ? foundChannels.map(channel =>
-      <p onClick={() => {
+      <p key={channel._id} onClick={() => {
         history.push(`/channel/${channel._id}`)
       }
       }> {channel.name} </p>
     ) : channels.map(channel =>
-      <p> {channel.name} </p>
+      <p key={channel._id}> {channel.name} </p>
     )}
   </div>
 

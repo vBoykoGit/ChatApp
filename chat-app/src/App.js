@@ -9,7 +9,7 @@ import { history } from './history/history';
 
 const App = () =>
   <Router history={history}>
-    <div>
+    <Switch>
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <PrivateRoute path="/" component={() =>
@@ -19,7 +19,7 @@ const App = () =>
         </Switch>
       }
       />
-    </div>
+    </Switch>
   </Router>
 
 export default App

@@ -5,10 +5,10 @@ import {
     token
 } from '../../helpers/token.js'
 import _ from 'lodash'
-import {
-    ObjectID
-} from '../../helpers/objectid.js'
 import socketProvider from '../webSocket.js';
+import { chatConstants } from '../constants/chatConstants';
+import { history } from '../../history/history';
+import { message } from '../reducers';
 
 export function connectToChatSocket() {
     return dispatch => {
@@ -18,10 +18,12 @@ export function connectToChatSocket() {
         console.log('socket', socketProvider);
 
         socketProvider.socket.onerror = (event) => {
+            console.log("error", event);
 
         }
 
         socketProvider.socket.onclose = (event) => {
+            console.log("error", event);
             dispatch(disconnect(event))
         }
 
@@ -79,78 +81,8 @@ function loginChatSocket() {
     }
 }
 
-export const sendMessage = (messageText, toChatId) => {
-    return dispatch => {
-
-        const message = {
-            _id: new ObjectID().toString(),
-            channelId: toChatId,
-            body: messageText,
-            userId: token(),
-            me: true,
-        };
-        const parseSendMessage = response => {
-            return {
-                timestamp: new Date().toString(),
-                id: response.userId,
-                chatId: response.toChatId,
-                message: response.message,
-                fromUser: response.fromUser
-            }
-        }
-
-        socketProvider.socket.send(JSON.stringify({
-            action: 'create_message',
-            payload: `${token()}`
-        }))
-        // var message = {}
-        // var id = ""
-        // message.user = {};
-
-        // const channelId = _.get(message, 'channelId');
-        // socket.send(JSON.stringify({
-        //     action: 'create_message',
-        //     payload: message,
-        // }))
-        // if (channelId) {
-        //     let channel = this.channels.get(channelId);
-        //     channel.lastMessage = _.get(message, 'body', '');
-        //     const obj = {
-
-        //         action: 'create_channel',
-        //         payload: channel,
-        //     };
-        //     socket.send(obj);
-
-
-        //     console.log("channel:", channel);
-        //     socket.send({
-        //         action: 'create_message',
-        //         payload: message,
-        //     });
-        // }
-        //console.log(JSON.stringify(this.messages.toJS()));
-
-        // socket.send(JSON.stringify({
-        //     action: 'create_message',
-        //     payload: message
-        // }))
-    }
-    const authRequest = () => ({
-        type: socketConstants.AuthRequest,
-    })
-    const authSuccess = () => ({
-        type: socketConstants.AuthSuccess,
-    })
-    const authFailure = (error) => ({
-        type: socketConstants.AuthFailure,
-        error
-    })
-}
-
 function readMessage(msg) {
-    return dispatch => {
-        //const currentUserId = _.toString(_.get(currentUser, '_id'));
+    return (dispatch, getState) => {
         const message = decodeMessage(msg);
         const action = _.get(message, 'action', '');
         const payload = _.get(message, 'payload', '');
@@ -161,17 +93,37 @@ function readMessage(msg) {
                 break;
             case 'user_online':
                 const isOnline = true;
-                this.onUpdateUserStatus(payload, isOnline);
+                //this.onUpdateUserStatus(payload, isOnline);
                 break;
             case 'message_added':
-                // const activeChannel = store.getActiveChannel();
-
-                // let notify = _.get(activeChannel, '_id') !== _.get(payload, 'channelId') && currentUserId !== _.get(payload, 'userId');
-                // this.onAddMessage(payload, notify);
-                break;
+                const currentUserId = getState().user.userInfo._id
+                const messageObject = {
+                    _id: payload._id,
+                    body: _.get(payload, 'body', ''),
+                    userId: _.get(payload, 'userId'),
+                    channelId: _.get(payload, 'channelId'),
+                    created: _.get(payload, 'created', new Date()),
+                    me: currentUserId === _.toString(_.get(payload, 'userId')),
+                    user: _.get(payload, 'user'),
+                }
+                dispatch(addMessage(messageObject))
+                break
             case 'channel_added':
-                // to do check payload object and insert new channel to store.
-                this.onAddChannel(payload);
+                const channelId = _.toString(_.get(payload, '_id'));
+                const userId = `${payload.userId}`;
+                const users = _.get(payload, 'users', []);
+                let channel = {
+                    _id: channelId,
+                    title: _.get(payload, 'title', ''),
+                    isNew: false,
+                    lastMessage: _.get(payload, 'lastMessage'),
+                    members: {},
+                    messages: {},
+                    userId: userId,
+                    created: new Date(),
+                }
+                _.each(users, (user) => channel.members = channel.members.set(`${user._id}`, true))
+                dispatch(addChannel(channel))
                 break;
             case 'auth_success':
                 dispatch(authSuccess())
@@ -194,6 +146,20 @@ function readMessage(msg) {
         return {
             type: socketConstants.AuthFailure,
             error
+        }
+    }
+
+    function addMessage(message) {
+        return {
+            type: chatConstants.ADD_CHANNEL,
+            message
+        }
+    }
+
+    function addChannel(channel) {
+        return {
+            type: chatConstants.ADD_CHANNEL,
+            channel
         }
     }
 }
