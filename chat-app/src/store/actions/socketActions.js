@@ -7,8 +7,6 @@ import {
 import _ from 'lodash'
 import socketProvider from '../webSocket.js';
 import { chatConstants } from '../constants/chatConstants';
-import { history } from '../../history/history';
-import { message } from '../reducers';
 
 export function connectToChatSocket() {
     return dispatch => {
@@ -50,12 +48,12 @@ export function connectToChatSocket() {
         }
     }
 
-    function connectFailure(error) {
-        return {
-            type: socketConstants.ConnectFailure,
-            error
-        }
-    }
+    // function connectFailure(error) {
+    //     return {
+    //         type: socketConstants.ConnectFailure,
+    //         error
+    //     }
+    // }
 
     function disconnect(error) {
         return {
@@ -92,7 +90,7 @@ function readMessage(msg) {
                 this.onUpdateUserStatus(payload, false);
                 break;
             case 'user_online':
-                const isOnline = true;
+                //const isOnline = true;
                 //this.onUpdateUserStatus(payload, isOnline);
                 break;
             case 'message_added':
@@ -122,7 +120,10 @@ function readMessage(msg) {
                     userId: userId,
                     created: new Date(),
                 }
-                _.each(users, (user) => channel.members = channel.members.set(`${user._id}`, true))
+                _.each(users, (user) => channel.members = {
+                    ...channel.members,
+                    [`${user._id}`]: true
+                })
                 dispatch(addChannel(channel))
                 break;
             case 'auth_success':
@@ -151,7 +152,7 @@ function readMessage(msg) {
 
     function addMessage(message) {
         return {
-            type: chatConstants.ADD_CHANNEL,
+            type: chatConstants.ADD_MESSAGE,
             message
         }
     }

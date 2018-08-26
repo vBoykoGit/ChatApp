@@ -19,7 +19,7 @@ const chat = (state = {
         case chatConstants.ADD_MESSAGE:
             return {
                 channels: state.channels.map(channel =>
-                    channel._id == action.message.channelId ? {
+                    channel._id === action.message.channelId ? {
                         ...channel,
                         messages: { ...channel.messages, [action.message._id]: action.message }
                     } : channel)

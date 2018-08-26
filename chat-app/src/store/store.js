@@ -3,9 +3,6 @@ import {
   combineReducers,
   applyMiddleware
 } from "redux";
-import {
-  messages
-} from "./reducers";
 import user from "./reducers/userReducers.js";
 import socket from './reducers/socketReducer.js'
 import thunk from 'redux-thunk'

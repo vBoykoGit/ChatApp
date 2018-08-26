@@ -8,13 +8,11 @@ import _ from 'lodash'
 import {
     connectToChatSocket
 } from './socketActions.js';
+import { token } from '../../helpers/token';
 
 export function login(email, password) {
     return dispatch => {
-        dispatch(request({
-            email
-        }));
-
+        dispatch(request())
         fetchThenDispatch('http://localhost:3001/api/users/login', 'POST',
             JSON.stringify({
                 email,
@@ -26,12 +24,11 @@ export function login(email, password) {
             dispatch(success(user))
             dispatch(connectToChatSocket())
         })
-    };
+    }
 
-    function request(user) {
+    function request() {
         return {
-            type: userConstants.LOGIN_REQUEST,
-            user
+            type: userConstants.LOGIN_REQUEST
         }
     }
 
@@ -42,10 +39,42 @@ export function login(email, password) {
         }
     }
 
-    function failure(error) {
+    // function failure(error) {
+    //     return {
+    //         type: userConstants.LOGIN_FAILURE,
+    //         error
+    //     }
+    // }
+}
+
+export function fetchUserInfoIfNeeded() {
+    return (dispatch, getState) => {
+        if (getState().user.userInfo && getState().socket.connected && getState().socket.loggedIn) {
+            return
+        }
+        dispatch(request())
+        fetchThenDispatch('http://localhost:3001/api/users/me', 'GET', null,
+            {
+                authorization: token(),
+            }
+        ).then((response) => {
+            const user = _.get(response, 'user');
+            localStorage.setItem("user", JSON.stringify(response))
+            dispatch(success(user))
+            dispatch(connectToChatSocket())
+        })
+    }
+
+    function request() {
         return {
-            type: userConstants.LOGIN_FAILURE,
-            error
+            type: userConstants.LOGIN_REQUEST
+        }
+    }
+
+    function success(user) {
+        return {
+            type: userConstants.LOGIN_SUCCESS,
+            user
         }
     }
 }
@@ -76,10 +105,10 @@ export function register(user) {
         }
     }
 
-    function failure(error) {
-        return {
-            type: userConstants.REGISTER_FAILURE,
-            error
-        }
-    }
+    // function failure(error) {
+    //     return {
+    //         type: userConstants.REGISTER_FAILURE,
+    //         error
+    //     }
+    // }
 }

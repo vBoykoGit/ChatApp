@@ -6,11 +6,13 @@ import {
   connect
 } from "react-redux"
 import { withRouter } from 'react-router'
+import { fetchUserInfoIfNeeded } from '../store/actions/userActions';
 
 class Chat extends Component {
   constructor(props) {
     super(props);
-
+    const { dispatch } = this.props;
+    dispatch(fetchUserInfoIfNeeded())
     this.state = {
       height: window.innerHeight
     };
@@ -51,9 +53,7 @@ const mapStateToProps = ({
   isSearching: search.isSearching,
   foundChannels: search.foundChannels,
   channels: chat.channels
-}
-  )
+})
 
 const connectedChat = withRouter(connect(mapStateToProps, null)(Chat))
-
 export { connectedChat as Chat }

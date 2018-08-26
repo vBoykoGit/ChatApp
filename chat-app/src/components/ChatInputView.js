@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 const ChatInputView = ({ onSend = f => f }) => {
   let _messageText;

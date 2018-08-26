@@ -13,7 +13,6 @@ const styles = theme => ({
 })
 
 const ChatSettings = ({ classes, onChange = f => f }) => {
-  var avatar = require("/Users/admin/Chat/chat-app/src/resources/avatar.png");
   return (
     <Input placeholder="Search" className={classes.input} onChange={(input) => { onChange(input.target.value) }} />
   )
