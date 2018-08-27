@@ -3,17 +3,7 @@ import ChatScrollViewCell from "./ChatScrollViewCell.js";
 
 export default class ChatMessages extends Component {
 
-  componentWillMount() {}
-
   componentDidMount() {}
-
-  componentWillReceiveProps(nextProps) {}
-
-  componentWillUpdate(nextProps, nextState) {}
-
-  componentDidUpdate(prevProps, prevState) {}
-
-  componentWillUnmount() {}
 
   render() {
     return (

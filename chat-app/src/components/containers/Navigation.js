@@ -7,14 +7,11 @@ import {
 import { searchChannels } from '../../store/actions/searchActions';
 import { withRouter } from 'react-router'
 
-const Navigation = ({ onChange }) => {
-  return (
-    <div className="navigation">
-      <ChatSettings onChange={onChange} />
-      <Chats />
-    </div>
-  );
-}
+const Navigation = ({ onChange }) =>
+  <div className="navigation">
+    <ChatSettings onChange={onChange} />
+    <Chats />
+  </div>
 
 const mapDispatchToProps = dispatch =>
   ({

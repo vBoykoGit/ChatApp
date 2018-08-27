@@ -12,11 +12,9 @@ const styles = theme => ({
   },
 })
 
-const ChatSettings = ({ classes, onChange = f => f }) => {
-  return (
-    <Input placeholder="Search" className={classes.input} onChange={(input) => { onChange(input.target.value) }} />
-  )
-}
+const ChatSettings = ({ classes, onChange = f => f }) =>
+  <Input placeholder="Search" className={classes.input} onChange={(input) => { onChange(input.target.value) }} />
+
 
 const styledChatSettings = withStyles(styles)(ChatSettings)
 

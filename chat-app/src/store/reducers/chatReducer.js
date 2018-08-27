@@ -10,7 +10,7 @@ const chat = (state = {
     switch (action.type) {
         case chatConstants.ADD_CHANNEL:
             return {
-                channels: [...state.channels, action.channel]
+                channels: [...state.channels.filter(channel => channel._id !== action.channel._id), action.channel]
             }
         case chatConstants.SET_CHANNELS:
             return {

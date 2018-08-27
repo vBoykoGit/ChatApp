@@ -7,7 +7,7 @@ import {
 } from "react-redux";
 import { withRouter } from 'react-router'
 import {
-  handleMessageFromChat
+  handleMessageFromChannel
 } from "../../store/actions/chatActions";
 
 const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
@@ -42,16 +42,15 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
     dispatch
   } = dispatchProps;
-  const onMessage = (messageText, chatID) => {
-    dispatch(handleMessageFromChat(messageText, chatID));
-  };
   const [channel] = (search.isSearching) ? search.foundChannels.filter(item => item._id === match.params.id) : chat.channels.filter(item => item._id === match.params.id)
-
+  const onMessage = (messageText, channel) => {
+    dispatch(handleMessageFromChannel(messageText, channel));
+  };
   return {
     channel,
     messages,
     onNewMessage: (messageText) => {
-      onMessage(messageText, ownProps.match.params.id);
+      onMessage(messageText, channel);
     }
   };
 };

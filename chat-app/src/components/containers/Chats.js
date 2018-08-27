@@ -2,7 +2,6 @@ import React from "react";
 import {
   connect
 } from "react-redux"
-import { searchChannels } from '../../store/actions/searchActions';
 import { withRouter } from 'react-router'
 
 const Chats = ({ isSearching, foundChannels, channels, history }) =>
@@ -13,30 +12,24 @@ const Chats = ({ isSearching, foundChannels, channels, history }) =>
       }
       }> {channel.name} </p>
     ) : channels.map(channel =>
-      <p key={channel._id}> {channel.name} </p>
-    )}
+      <p key={channel._id} onClick={() => {
+        history.push(`/channel/${channel._id}`)
+      }
+      }> {channel.title.length ? channel.title : "test"} </p>)}
   </div>
 
 const mapStateToProps = ({
   search,
   chat
-}, { history, location }) => (
+}, { history }) => (
     {
       isSearching: search.isSearching,
       foundChannels: search.foundChannels,
       channels: chat.channels,
-      location,
       history
     }
   )
 
-const mapDispatchToProps = dispatch =>
-  ({
-    onChange(query) {
-      dispatch(searchChannels(query))
-    }
-  })
-
-const connectedChats = withRouter(connect(mapStateToProps, mapDispatchToProps)(Chats))
+const connectedChats = withRouter(connect(mapStateToProps)(Chats))
 
 export { connectedChats as Chats }

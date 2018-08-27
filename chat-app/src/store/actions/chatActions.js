@@ -53,16 +53,18 @@ export function getMessages(channelId) {
     }
 }
 
-export const handleMessageFromChat = (messageText, chatId) => {
+export const handleMessageFromChannel = (messageText, channel) => {
     return (dispatch, getStore) => {
+        console.log(channel);
+        
         const { channels } = getStore().chat
-        const [channel] = channels.filter(item => item._id === chatId)
-        if (!channel) {
-            dispatch(createChannel(messageText, chatId))
-            setTimeout(() => dispatch(sendMessage(messageText, chatId)), 500)
+        const [existingChannel] = channels.filter(item => item._id === channel._id)
+        if (!existingChannel) {
+            dispatch(createChannel(messageText, channel))
+            setTimeout(() => dispatch(sendMessage(messageText, channel._id)), 500)
             return
         }
-        dispatch(sendMessage(messageText, chatId))
+        dispatch(sendMessage(messageText, existingChannel._id))
     }
 }
 
@@ -85,21 +87,21 @@ const sendMessage = (messageText, toChatId) => {
     }
 }
 
-const createChannel = (message, chatId) => {
+const createChannel = (messageText, withUser) => {
     return (dispatch, getStore) => {
         const { userInfo } = getStore().user
         const userId = userInfo._id
         const channel = {
-            _id: chatId,
-            title: '',
+            _id: withUser._id,
+            title: withUser.name,
             lastMessage: {},
-            members: { [userId]: true, [chatId]: true },
+            members: { [userId]: true, [withUser._id]: true },
             messages: {},
             isNew: true,
             userId: userId,
             created: new Date(),
         };
-        channel.lastMessage = _.get(message, 'body', '');
+        channel.lastMessage = messageText.length ? messageText : '';
         socketProvider.socket.send(JSON.stringify({
             action: 'create_channel',
             payload: channel,

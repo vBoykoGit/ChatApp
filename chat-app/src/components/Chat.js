@@ -7,12 +7,14 @@ import {
 } from "react-redux"
 import { withRouter } from 'react-router'
 import { fetchUserInfoIfNeeded } from '../store/actions/userActions';
+import { getChannels } from '../store/actions/chatActions';
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     const { dispatch } = this.props;
     dispatch(fetchUserInfoIfNeeded())
+    dispatch(getChannels())
     this.state = {
       height: window.innerHeight
     };
