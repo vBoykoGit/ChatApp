@@ -1,6 +1,7 @@
 import {
     chatConstants
 } from '../constants/chatConstants';
+import _ from 'lodash'
 
 const chat = (state = {
     channels: []
@@ -22,6 +23,16 @@ const chat = (state = {
                     channel._id === action.message.channelId ? {
                         ...channel,
                         messages: { ...channel.messages, [action.message._id]: action.message }
+                    } : channel)
+            }
+        case chatConstants.SET_MESSAGES:
+            return {
+                channels: state.channels.map(channel =>
+                    channel._id === action.channelId ? {
+                        ...channel,
+                        messages: {
+                            ...channel.messages, ...action.messages.reduce((obj, item) => ({ ...obj, [item._id]: item }), {})
+                        }
                     } : channel)
             }
         default:

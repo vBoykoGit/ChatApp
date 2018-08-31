@@ -1,20 +1,14 @@
-import React, { Component } from "react";
-import classNames from "classnames";
+import React from "react";
 
-export default class ChatScrollViewCell extends Component {
-  render() {
-    return (
-      <div className="chatScrollViewCell">
-        <div>Testttttt Testttttt Testttttt Testttttt</div>
-        <div className="messageInfo">
-          <img
-            src={require("/Users/admin/Chat/chat-app/src/resources/avatar.png")}
-            width="40"
-            height="40"
-          />
-          <p>12:12</p>
-        </div>
-      </div>
-    );
-  }
-}
+export const ChatScrollViewCell = ({ message = {} }) =>
+  <div className="chatScrollViewCell">
+    <div>{message.body}</div>
+    <div className="messageInfo">
+      <img
+        src={require("/Users/admin/Chat/chat-app/src/resources/avatar.png")}
+        width="40"
+        height="40"
+      />
+      <p>{new Intl.DateTimeFormat("en-GB", { hour: "numeric", minute: "numeric" }).format(new Date(message.created))}</p>
+    </div>
+  </div>

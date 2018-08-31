@@ -18,8 +18,6 @@ export function getChannels() {
                 authorization: token(),
             }
         ).then((response) => {
-            console.log(response);
-
             dispatch(setChannels(response))
         })
     };
@@ -39,16 +37,16 @@ export function getMessages(channelId) {
                 authorization: token(),
             }
         ).then((response) => {
-            console.log(response);
-            const messages = response.data
-            dispatch(setMessages(messages))
+            const messages = response
+            dispatch(setMessages(messages, channelId))
         })
     }
 
-    function setMessages(messages) {
+    function setMessages(messages, toChannelId) {
         return {
             type: chatConstants.SET_MESSAGES,
-            messages
+            messages,
+            channelId: toChannelId
         }
     }
 }
@@ -56,7 +54,7 @@ export function getMessages(channelId) {
 export const handleMessageFromChannel = (messageText, channel) => {
     return (dispatch, getStore) => {
         console.log(channel);
-        
+
         const { channels } = getStore().chat
         const [existingChannel] = channels.filter(item => item._id === channel._id)
         if (!existingChannel) {

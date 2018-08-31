@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../css/chat.css";
 const avatar = require("/Users/admin/Chat/chat-app/src/resources/avatar.png");
 

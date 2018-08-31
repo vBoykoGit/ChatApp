@@ -1,6 +1,6 @@
 import React from "react";
 import ChatHeader from "../ChatHeader"
-import ChatMessages from "../ChatMessages"
+import { ChatMessages } from "../ChatMessages"
 import ChatInputView from "../ChatInputView"
 import {
   connect
@@ -10,15 +10,17 @@ import {
   handleMessageFromChannel
 } from "../../store/actions/chatActions";
 
-const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
-  <div className="content">
-    <ChatHeader chatName={channel.name} />
-    <ChatMessages />
+const ChatField = ({ channel = {}, onNewMessage = f => f }) => {
+  console.log(channel);
+  
+  return (<div className="content">
+    <ChatHeader chatName={channel.title} />
+    <ChatMessages messages={channel.messages} />
     <ChatInputView onSend={messageText => {
       onNewMessage(messageText)
     }} />
-  </div>
-
+  </div>)
+}
 const mapStateToProps = ({
   chat,
   search,

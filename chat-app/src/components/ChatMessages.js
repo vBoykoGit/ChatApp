@@ -1,31 +1,14 @@
-import React, { Component } from "react";
-import ChatScrollViewCell from "./ChatScrollViewCell.js";
+import React from "react";
+import { ChatScrollViewCell } from "./ChatScrollViewCell.js";
+import InfiniteScroll from 'react-infinite-scroller'
 
-export default class ChatMessages extends Component {
-
-  componentDidMount() {}
-
-  render() {
-    return (
-      <div className="chatMessages">
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-        <ChatScrollViewCell />
-      </div>
-    );
-  }
-}
+export const ChatMessages = ({ messages = [] }) =>
+  <div className="chatMessages">
+    <InfiniteScroll
+      pageStart={0}
+      // loadMore={}
+      // hasMore={}
+      loader={<div className="loader">Loading ...</div>}>
+      {Object.entries(messages).map(([key, value]) => <ChatScrollViewCell key={key} message={value} />)}
+    </InfiniteScroll>
+  </div>

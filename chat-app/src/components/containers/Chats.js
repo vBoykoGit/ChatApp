@@ -3,33 +3,33 @@ import {
   connect
 } from "react-redux"
 import { withRouter } from 'react-router'
+import { ChatInfo } from "../ChatInfo";
+import { history } from '../../history/history';
+import { getMessages } from '../../store/actions/chatActions';
 
-const Chats = ({ isSearching, foundChannels, channels, history }) =>
+const Chats = ({ channels, onClick }) =>
   <div className="chats">
-    {(isSearching) ? foundChannels.map(channel =>
-      <p key={channel._id} onClick={() => {
-        history.push(`/channel/${channel._id}`)
-      }
-      }> {channel.name} </p>
-    ) : channels.map(channel =>
-      <p key={channel._id} onClick={() => {
-        history.push(`/channel/${channel._id}`)
-      }
-      }> {channel.title.length ? channel.title : "test"} </p>)}
+    {channels.map(channel =>
+      <ChatInfo key={channel._id} title={channel.name === '' ? channel.name : channel.title} onClick={() => onClick(channel._id)} />)}
   </div>
 
 const mapStateToProps = ({
   search,
   chat
-}, { history }) => (
-    {
-      isSearching: search.isSearching,
-      foundChannels: search.foundChannels,
-      channels: chat.channels,
-      history
-    }
-  )
+}) => {
+  const channels = (search.isSearching) ? search.foundChannels : chat.channels
+  return {
+    channels
+  }
+}
 
-const connectedChats = withRouter(connect(mapStateToProps)(Chats))
+const mapDispatchToProps = dispatch => ({
+  onClick(id) {
+    history.push(`/channel/${id}`)
+    dispatch(getMessages(id))
+  }
+})
+
+const connectedChats = withRouter(connect(mapStateToProps, mapDispatchToProps)(Chats))
 
 export { connectedChats as Chats }
