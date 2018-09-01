@@ -53,7 +53,8 @@ export function login(email, password) {
 
 export function fetchUserInfoIfNeeded() {
     return (dispatch, getState) => {
-        if (getState().user.userInfo && getState().socket.connected && getState().socket.loggedIn) {
+        const state = getState()
+        if (state.user.userInfo || state.socket.connected || state.socket.loggedIn || state.user.loggingIn || state.socket.connecting || state.socket.loggingIn) {
             return
         }
         dispatch(request())
