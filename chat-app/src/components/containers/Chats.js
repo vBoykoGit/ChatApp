@@ -7,12 +7,14 @@ import { ChatInfo } from "../ChatInfo";
 import { history } from '../../history/history';
 import { getMessages } from '../../store/actions/chatActions';
 
-const Chats = ({ channels, onClick }) =>
-  <div className="chats">
-    {channels.map(channel =>
-      <ChatInfo key={channel._id} title={channel.name === '' ? channel.name : channel.title} onClick={() => onClick(channel._id)} />)}
-  </div>
-
+const Chats = ({ channels = [], onClick }) => {
+  console.log(channels);
+  return (
+    <div className="chats">
+      {channels.map(channel =>
+        <ChatInfo key={channel._id} title={channel.title === null || channel.title === '' || channel.title === undefined ? channel.name : channel.title} onClick={() => onClick(channel._id)} />)}
+    </div>)
+}
 const mapStateToProps = ({
   search,
   chat

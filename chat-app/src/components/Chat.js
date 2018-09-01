@@ -7,7 +7,7 @@ import {
 } from "react-redux"
 import { withRouter } from 'react-router'
 import { fetchUserInfoIfNeeded } from '../store/actions/userActions';
-import { getChannels, getMessages } from '../store/actions/chatActions';
+import { getChannels } from '../store/actions/chatActions';
 
 class Chat extends Component {
   constructor(props) {

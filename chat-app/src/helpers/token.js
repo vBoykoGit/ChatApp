@@ -1,5 +1,5 @@
 export const token = () => {
-    let user = JSON.parse(localStorage.getItem('user'));
-
-    return user._id ? user._id : ""
+    const user = localStorage.getItem('user')
+    const parsedUser = user !== 'undefined' ? JSON.parse(user) : {}
+    return parsedUser._id ? parsedUser._id : ""
 }

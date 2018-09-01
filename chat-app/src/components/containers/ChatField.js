@@ -10,17 +10,15 @@ import {
   handleMessageFromChannel
 } from "../../store/actions/chatActions";
 
-const ChatField = ({ channel = {}, onNewMessage = f => f }) => {
-  console.log(channel);
-  
-  return (<div className="content">
+const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
+  <div className="content">
     <ChatHeader chatName={channel.title} />
     <ChatMessages messages={channel.messages} />
     <ChatInputView onSend={messageText => {
       onNewMessage(messageText)
     }} />
-  </div>)
-}
+  </div>
+  
 const mapStateToProps = ({
   chat,
   search,
@@ -36,7 +34,6 @@ const mapStateToProps = ({
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
-    messages,
     chat,
     search,
     match
@@ -44,13 +41,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
     dispatch
   } = dispatchProps;
-  const [channel] = (search.isSearching) ? search.foundChannels.filter(item => item._id === match.params.id) : chat.channels.filter(item => item._id === match.params.id)
+  const foundChannels = search.foundChannels ? search.foundChannels : []
+  const [channel] = (search.isSearching) ? foundChannels.filter(item => item._id === match.params.id) : chat.channels.filter(item => item._id === match.params.id)
   const onMessage = (messageText, channel) => {
     dispatch(handleMessageFromChannel(messageText, channel));
   };
   return {
     channel,
-    messages,
     onNewMessage: (messageText) => {
       onMessage(messageText, channel);
     }

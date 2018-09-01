@@ -22,6 +22,17 @@ const search = (state = {
                     foundChannels: [],
                     isSearching: action.isSearching
                 }
+        case searchConstants.SET_MESSAGES:
+            return {
+                ...state,
+                foundChannels: state.foundChannels.map(channel =>
+                    channel._id === action.channelId ? {
+                        ...channel,
+                        messages: {
+                            ...channel.messages, ...action.messages.reduce((obj, item) => ({ ...obj, [item._id]: item }), {})
+                        }
+                    } : channel)
+            }
         default:
             return state
     }

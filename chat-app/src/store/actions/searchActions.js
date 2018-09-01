@@ -9,7 +9,7 @@ export function searchChannels(query = '') {
     return dispatch => {
         if (query.length) {
             dispatch(isSearching(true))
-            fetchThenDispatch('http://localhost:3001/api/users/search', 'POST',
+            fetchThenDispatch(dispatch, 'http://localhost:3001/api/users/search', 'POST',
                 JSON.stringify({
                     search: query
                 })

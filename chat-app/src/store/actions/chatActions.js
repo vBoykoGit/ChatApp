@@ -10,10 +10,11 @@ import {
 } from '../../helpers/token';
 import socketProvider from '../webSocket';
 import { ObjectID } from '../../helpers/objectid';
+import { searchConstants } from '../constants/searchConstants';
 
 export function getChannels() {
     return dispatch => {
-        fetchThenDispatch('http://localhost:3001/api/me/channels', 'GET', null,
+        fetchThenDispatch(dispatch, 'http://localhost:3001/api/me/channels', 'GET', null,
             {
                 authorization: token(),
             }
@@ -31,20 +32,20 @@ export function getChannels() {
 }
 
 export function getMessages(channelId) {
-    return dispatch => {
-        fetchThenDispatch(`http://localhost:3001/api/channels/${channelId}/messages`, 'GET', null,
+    return (dispatch, getStore) => {
+        fetchThenDispatch(dispatch, `http://localhost:3001/api/channels/${channelId}/messages`, 'GET', null,
             {
                 authorization: token(),
             }
         ).then((response) => {
             const messages = response
-            dispatch(setMessages(messages, channelId))
+            dispatch(setMessages(messages, channelId, getStore().search.isSearching))
         })
     }
 
-    function setMessages(messages, toChannelId) {
+    function setMessages(messages, toChannelId, isSearching) {
         return {
-            type: chatConstants.SET_MESSAGES,
+            type: isSearching ? searchConstants.SET_MESSAGES : chatConstants.SET_MESSAGES,
             messages,
             channelId: toChannelId
         }

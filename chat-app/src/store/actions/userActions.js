@@ -13,13 +13,17 @@ import { token } from '../../helpers/token';
 export function login(email, password) {
     return dispatch => {
         dispatch(request())
-        fetchThenDispatch('http://localhost:3001/api/users/login', 'POST',
+        fetchThenDispatch(dispatch, 'http://localhost:3001/api/users/login', 'POST',
             JSON.stringify({
                 email,
                 password
             })
         ).then((response) => {
             const user = _.get(response, 'user');
+            if (!user) {
+                dispatch(failure(response))
+                return
+            }
             localStorage.setItem("user", JSON.stringify(response))
             dispatch(success(user))
             dispatch(connectToChatSocket())
@@ -39,12 +43,12 @@ export function login(email, password) {
         }
     }
 
-    // function failure(error) {
-    //     return {
-    //         type: userConstants.LOGIN_FAILURE,
-    //         error
-    //     }
-    // }
+    function failure(error) {
+        return {
+            type: userConstants.LOGIN_FAILURE,
+            error
+        }
+    }
 }
 
 export function fetchUserInfoIfNeeded() {
@@ -53,12 +57,16 @@ export function fetchUserInfoIfNeeded() {
             return
         }
         dispatch(request())
-        fetchThenDispatch('http://localhost:3001/api/users/me', 'GET', null,
+        fetchThenDispatch(dispatch, 'http://localhost:3001/api/users/me', 'GET', null,
             {
                 authorization: token(),
             }
         ).then((response) => {
             const user = _.get(response, 'user');
+            if (!user) {
+                dispatch(failure(response))
+                return
+            }
             localStorage.setItem("user", JSON.stringify(response))
             dispatch(success(user))
             dispatch(connectToChatSocket())
@@ -77,12 +85,19 @@ export function fetchUserInfoIfNeeded() {
             user
         }
     }
+
+    function failure(error) {
+        return {
+            type: userConstants.LOGIN_FAILURE,
+            error
+        }
+    }
 }
 
 export function register(user) {
     return dispatch => {
         dispatch(request(user));
-        fetchThenDispatch('http://localhost:3001/api/users', 'POST',
+        fetchThenDispatch(dispatch, 'http://localhost:3001/api/users', 'POST',
             JSON.stringify({
                 name: user.name,
                 email: user.email,
