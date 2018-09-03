@@ -1,5 +1,13 @@
 # ChatApp
-ToDo:
+## Run project
+cd chat-app
+npm install
+npm start
+cd server
+npm install
+npm start
+
+## ToDo:
 - [ ] Design improves
 - [ ] Isomorphic implementation
 
