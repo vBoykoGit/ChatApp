@@ -87,7 +87,7 @@ function readMessage(msg) {
 
         switch (action) {
             case 'user_offline':
-                this.onUpdateUserStatus(payload, false);
+                //this.onUpdateUserStatus(payload, false);
                 break;
             case 'user_online':
                 //const isOnline = true;

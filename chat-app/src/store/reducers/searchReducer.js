@@ -6,6 +6,7 @@ const search = (state = {
     foundChannels: [],
     isSearching: false
 }, action = {
+    messages: [],
     type: null
 }) => {
     switch (action.type) {

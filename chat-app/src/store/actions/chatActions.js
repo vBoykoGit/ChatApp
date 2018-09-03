@@ -37,16 +37,20 @@ export function getMessages(channelId) {
             {
                 authorization: token(),
             }
-        ).then((response) => {
-            const messages = response
-            dispatch(setMessages(messages, channelId, getStore().search.isSearching))
+        ).then((response = []) => {
+            const store = getStore()
+            const messages = response.map(message => ({
+                ...message,
+                me: store.user.userInfo._id === message.userId
+            }))
+            dispatch(setMessages(messages, channelId, store.search.isSearching))
         })
     }
 
-    function setMessages(messages, toChannelId, isSearching) {
+    function setMessages(messages = [], toChannelId, isSearching) {
         return {
             type: isSearching ? searchConstants.SET_MESSAGES : chatConstants.SET_MESSAGES,
-            messages,
+            messages: messages.sort((first, second) => first.created.localeCompare(second.created)),
             channelId: toChannelId
         }
     }

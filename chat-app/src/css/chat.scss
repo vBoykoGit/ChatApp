@@ -1,29 +1,41 @@
 @import "chatVariables.scss";
+
 .chatApp {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
-  background: yellow;
 }
 
 .navigation {
   width: 20%;
   height: 100%;
   overflow: scroll;
-  background-color: #ffd34e;
   display: flex;
   flex-direction: column;
+  border-right: 1px solid rgb(128, 128, 128);
+}
+
+.chatInfo {
+  border-bottom: 1px solid rgb(128, 128, 128);
 }
 
 .chats {
   overflow: scroll;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
 }
 
 .chatHeader {
-  background: green;
   display: flex;
-  direction: row;
+  flex-flow: row nowrap;
+  // border-top: 5px solid transparent;
+  border-bottom: 1px solid rgb(128, 128, 128);
+}
+
+.avatar {
+  border: 10px solid transparent;
+  border-top: 5px solid transparent;
 }
 
 .chatHeaderAction {
@@ -44,7 +56,6 @@
 .chatMessages {
   height: 100%;
   overflow: scroll;
-  background: blueviolet;
 }
 
 .chatInputView {
@@ -54,11 +65,16 @@
 
 .chatScrollViewCell {
   display: flex;
-  flex-direction: row-reverse nowrap;
+  flex-flow: row nowrap;
   width: 100%;
-  background-color: bisque;
+}
+
+.reverse {
+  flex-flow: row-reverse nowrap;
 }
 
 .messageInfo {
-  margin-left: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  border: 5px solid transparent;
 }
