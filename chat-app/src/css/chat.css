@@ -12,13 +12,21 @@
   flex-direction: column;
   border-right: 1px solid gray; }
 
-.chatInfo {
-  border-bottom: 1px solid gray; }
+.chatInfo,
+.chatInfo:hover {
+  color: black;
+  border-bottom: 1px solid gray;
+  text-decoration: none; }
 
 .chats {
   overflow: scroll;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent; }
+
+.activeStyle,
+.activeStyle:hover {
+  color: blue;
+  text-decoration: inherit; }
 
 .chatHeader {
   display: flex;

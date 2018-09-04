@@ -26,6 +26,12 @@ class Chat extends Component {
     window.removeEventListener("resize", this.onResize);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { dispatch, match } = this.props;
+    if (match.params.id !== prevProps.match.params.id) {
+      dispatch(getMessages(match.params.id))
+    }
+  }
   onResize = () => {
     this.setState({
       height: window.innerHeight

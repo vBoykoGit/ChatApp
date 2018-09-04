@@ -34,7 +34,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
     dispatch
   } = dispatchProps;
-  // const { currentChannel } = ownProps
   const foundChannels = search.foundChannels ? search.foundChannels : []
   const channelId = match.params.id
   let [channel] = chat.channels.filter(item => item._id === channelId)

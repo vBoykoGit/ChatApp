@@ -16,8 +16,11 @@
   border-right: 1px solid rgb(128, 128, 128);
 }
 
-.chatInfo {
+.chatInfo,
+.chatInfo:hover {
+  color: black;
   border-bottom: 1px solid rgb(128, 128, 128);
+  text-decoration: none
 }
 
 .chats {
@@ -26,10 +29,15 @@
   border-right: 5px solid transparent;
 }
 
+.activeStyle,
+.activeStyle:hover {
+  color: blue;
+  text-decoration: inherit
+}
+
 .chatHeader {
   display: flex;
   flex-flow: row nowrap;
-  // border-top: 5px solid transparent;
   border-bottom: 1px solid rgb(128, 128, 128);
 }
 
