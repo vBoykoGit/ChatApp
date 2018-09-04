@@ -2,13 +2,9 @@ import React from "react";
 import ChatHeader from "../ChatHeader"
 import { ChatMessages } from "../ChatMessages"
 import ChatInputView from "../ChatInputView"
-import {
-  connect
-} from "react-redux";
+import { connect } from "react-redux";
 import { withRouter } from 'react-router'
-import {
-  handleMessageFromChannel
-} from "../../store/actions/chatActions";
+import { handleMessageFromChannel } from "../../store/actions/chatActions";
 
 const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
   <div className="content">
@@ -18,17 +14,14 @@ const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
       onNewMessage(messageText)
     }} />
   </div>
-  
+
 const mapStateToProps = ({
   chat,
-  search,
-  messages
-}, { match }) => {
+  search }, { match }) => {
   return {
     chat,
     search,
-    match,
-    messages
+    match
   }
 }
 
@@ -41,8 +34,13 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const {
     dispatch
   } = dispatchProps;
+  // const { currentChannel } = ownProps
   const foundChannels = search.foundChannels ? search.foundChannels : []
-  const [channel] = (search.isSearching) ? foundChannels.filter(item => item._id === match.params.id) : chat.channels.filter(item => item._id === match.params.id)
+  const channelId = match.params.id
+  let [channel] = chat.channels.filter(item => item._id === channelId)
+  if (!channel && search.isSearching) {
+    [channel] = foundChannels.filter(item => item._id === channelId)
+  }
   const onMessage = (messageText, channel) => {
     dispatch(handleMessageFromChannel(messageText, channel));
   };

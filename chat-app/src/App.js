@@ -1,6 +1,6 @@
 import React from "react";
-import { Chat } from "./components/Chat";
 import "./css/App.css";
+import { Chat } from "./components/containers/Chat";
 import { PrivateRoute } from './components/PrivateRoute'
 import { RegisterPage } from './components/containers/RegisterPage'
 import { LoginPage } from './components/containers/LoginPage'

@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import "../css/chat.css";
-import { Navigation } from "./containers/Navigation"
-import { ChatField } from './containers/ChatField';
-import {
-  connect
-} from "react-redux"
+import { Navigation } from "./Navigation"
+import { ChatField } from './ChatField';
+import { connect } from "react-redux"
 import { withRouter } from 'react-router'
-import { fetchUserInfoIfNeeded } from '../store/actions/userActions';
-import { getChannels, getMessages } from '../store/actions/chatActions';
+import { fetchUserInfoIfNeeded } from '../../store/actions/userActions';
+import { getChannels, getMessages } from '../../store/actions/chatActions';
 
 class Chat extends Component {
   constructor(props) {
