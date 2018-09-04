@@ -14,7 +14,7 @@ import { searchConstants } from '../constants/searchConstants';
 
 export function getChannels() {
     return dispatch => {
-        fetchThenDispatch(dispatch, 'http://localhost:3001/api/me/channels', 'GET', null,
+        fetchThenDispatch(dispatch, '/api/me/channels', 'GET', null,
             {
                 authorization: token(),
             }
@@ -23,7 +23,7 @@ export function getChannels() {
         })
     };
 
-    function setChannels(channels) {
+    function setChannels(channels = []) {
         return {
             type: chatConstants.SET_CHANNELS,
             channels
@@ -33,7 +33,7 @@ export function getChannels() {
 
 export function getMessages(channelId) {
     return (dispatch, getStore) => {
-        fetchThenDispatch(dispatch, `http://localhost:3001/api/channels/${channelId}/messages`, 'GET', null,
+        fetchThenDispatch(dispatch, `/api/channels/${channelId}/messages`, 'GET', null,
             {
                 authorization: token(),
             }

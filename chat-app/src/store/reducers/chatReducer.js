@@ -6,6 +6,7 @@ import _ from 'lodash'
 const chat = (state = {
     channels: []
 }, action = {
+    channels: [],
     type: null
 }) => {
     switch (action.type) {

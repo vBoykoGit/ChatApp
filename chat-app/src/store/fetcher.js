@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { apiURL } from '../helpers/config';
 
 const parseToJson = response => {
     const json = response.json()
@@ -8,8 +9,8 @@ const parseToJson = response => {
 
 const logError = error => console.error("Catch", error)
 
-export const fetchThenDispatch = (dispatch, url, method, body, headers) =>
-    fetch(url, {
+export const fetchThenDispatch = (dispatch, path, method, body, headers) =>
+    fetch(`${apiURL}${path}`, {
         method,
         body,
         headers: {

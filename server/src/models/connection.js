@@ -134,6 +134,8 @@ export default class Connection {
         const payload = _.get(msg, 'payload');
         const userConnection = this.connections.get(socketId);
 
+        console.log("Got message", msg);
+        
         switch (action) {
 
 
@@ -143,12 +145,12 @@ export default class Connection {
                     let messageObject = payload;
 
                     messageObject.userId = _.get(userConnection, 'userId');
-                    //console.log("Got message from client about creating new message", payload);
+                    console.log("Got message from client about creating new message", payload);
 
                     this.app.models.message.create(messageObject).then((message) => {
 
 
-                        // console.log("Mesage crewated", message);
+                        console.log("Mesage crewated", message);
 
                         const channelId = _.toString(_.get(message, 'channelId'));
                         this.app.models.channel.load(channelId).then((channel) => {
@@ -211,7 +213,7 @@ export default class Connection {
 
                     // successful created channel ,
 
-                    //console.log("Succesful created new channel", typeof userId, chanelObject);
+                    console.log("Succesful created new channel", typeof userId, chanelObject);
 
                     // let send back to all members in this channel  with new channel  created
                     let memberConnections = [];

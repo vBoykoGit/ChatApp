@@ -1,3 +1,5 @@
+import { websocketURL } from '../helpers/config';
+
 class SocketProvider {
     constructor() {
         if (!SocketProvider.instance) {
@@ -8,7 +10,7 @@ class SocketProvider {
     }
 
     connect = () => {
-        this.socket = new WebSocket('ws://localhost:3001')
+        this.socket = new WebSocket(websocketURL)
     }
 }
 

@@ -13,7 +13,7 @@ import { token } from '../../helpers/token';
 export function login(email, password) {
     return dispatch => {
         dispatch(request())
-        fetchThenDispatch(dispatch, 'http://localhost:3001/api/users/login', 'POST',
+        fetchThenDispatch(dispatch, '/api/users/login', 'POST',
             JSON.stringify({
                 email,
                 password
@@ -58,7 +58,7 @@ export function fetchUserInfoIfNeeded() {
             return
         }
         dispatch(request())
-        fetchThenDispatch(dispatch, 'http://localhost:3001/api/users/me', 'GET', null,
+        fetchThenDispatch(dispatch, '/api/users/me', 'GET', null,
             {
                 authorization: token(),
             }
@@ -98,7 +98,7 @@ export function fetchUserInfoIfNeeded() {
 export function register(user) {
     return dispatch => {
         dispatch(request(user));
-        fetchThenDispatch(dispatch, 'http://localhost:3001/api/users', 'POST',
+        fetchThenDispatch(dispatch, '/api/users', 'POST',
             JSON.stringify({
                 name: user.name,
                 email: user.email,
