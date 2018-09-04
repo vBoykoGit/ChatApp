@@ -1,10 +1,11 @@
 # ChatApp
 ## Run project
+You need running MongoDB to run this project
 ```
-cd chat-app
+cd ChatApp/chat-app
 npm install
 npm start
-cd server
+cd ChatApp/server
 npm install
 npm start
 ```
