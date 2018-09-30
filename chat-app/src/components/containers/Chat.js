@@ -12,7 +12,9 @@ class Chat extends Component {
     const { dispatch, match } = this.props;
     dispatch(fetchUserInfoIfNeeded())
     dispatch(getChannels())
-    dispatch(getMessages(match.params.id))
+    if (match.params.id) {
+      dispatch(getMessages(match.params.id))
+    }
     this.state = {
       height: window.innerHeight
     };
@@ -40,7 +42,7 @@ class Chat extends Component {
     });
     console.log(window.innerHeight);
   }
-  
+
   render() {
     const { height } = this.state;
     const style = {

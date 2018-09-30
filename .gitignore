@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+chat-app/node_modules/.cache
 
 # testing
 /coverage

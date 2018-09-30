@@ -9,6 +9,15 @@ const parseToJson = response => {
 
 const logError = error => console.error("Catch", error)
 
+const checkStatus = response => {
+    if (response.status >= 400) {
+        throw new Error(`Bad request response from server with status: ${response.status}`);
+    }
+    return response
+}
+
+const checkErrors = response => response
+
 export const fetchThenDispatch = (dispatch, path, method, body, headers) =>
     fetch(`${apiURL}${path}`, {
         method,
@@ -17,11 +26,7 @@ export const fetchThenDispatch = (dispatch, path, method, body, headers) =>
             'Content-Type': 'application/json',
             ...headers
         }
-    }).then(response => {
-        if (response.status >= 400) {
-            throw new Error("Bad request response from server");
-        }
-        return response
-    })
+    }).then(checkStatus)
         .then(parseToJson)
+        .then(checkErrors)
         .catch(logError)
