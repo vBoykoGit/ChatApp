@@ -1,11 +1,5 @@
 @import "chatVariables.scss";
-
-.chatApp {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
+@import "./common.blocks/chatApp/chatApp.scss";
 
 .navigation {
   width: 20%;

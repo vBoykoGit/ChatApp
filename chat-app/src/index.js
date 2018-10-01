@@ -5,7 +5,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import storeFactory from './store/store.js'
-import './css/App.css';
+// import './css/App.css';
 
 const store = storeFactory()
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/chat.css";
+
 const avatar = require("/Users/admin/Chat/chat-app/src/resources/avatar.png");
 
 const ChatHeader = ({ chatName = '' }) =>
