@@ -6,7 +6,7 @@ import { RegisterPage } from './components/containers/RegisterPage'
 import { LoginPage } from './components/containers/LoginPage'
 import { Router, Route, Switch } from "react-router-dom";
 import { history } from './history/history';
-import './css/styles.css'
+import './css/styles.scss'
 
 const App = () =>
   <div className='app'>
