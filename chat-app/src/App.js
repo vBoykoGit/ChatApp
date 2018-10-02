@@ -1,5 +1,4 @@
 import React from "react";
-// import "./css/App.css";
 import { Chat } from "./components/containers/Chat";
 import { PrivateRoute } from './components/PrivateRoute'
 import { RegisterPage } from './components/containers/RegisterPage'

@@ -7,7 +7,7 @@ import { withRouter } from 'react-router'
 import { handleMessageFromChannel } from "../../store/actions/chatActions";
 
 const ChatField = ({ channel = {}, onNewMessage = f => f }) =>
-  <div className="content">
+  <div className="chatField">
     <ChatHeader chatName={channel.title} />
     <ChatMessages messages={channel.messages} />
     <ChatInputView onSend={messageText => {

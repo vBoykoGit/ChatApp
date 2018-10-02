@@ -6,6 +6,7 @@ export const ChatScrollViewCell = ({ message = {} }) =>
     <div className='messageInfo'>
       <img
         src={require("/Users/admin/Chat/chat-app/src/resources/avatar.png")}
+        alt = ''
         width="40"
         height="40"
       />

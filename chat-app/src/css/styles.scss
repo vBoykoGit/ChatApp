@@ -1,5 +1,11 @@
 @import "./common.blocks/app/app.scss";
 @import "./common.blocks/chatApp/chatApp.scss";
+@import "./common.blocks/navigation/navigation";
+@import "./common.blocks/chatField/chatField";
+@import "./common.blocks/chats/chats";
+@import "./common.blocks/chatHeader/chatHeader";
+@import "./common.blocks/chatMessages/chatMessages";
+@import "./common.blocks/chatInputView/chatInputView";
 
 html,
 body {

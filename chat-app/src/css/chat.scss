@@ -1,14 +1,6 @@
 @import "chatVariables.scss";
-@import "./common.blocks/chatApp/chatApp.scss";
 
-.navigation {
-  width: 20%;
-  height: 100%;
-  overflow: scroll;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid rgb(128, 128, 128);
-}
+
 
 .chatInfo,
 .chatInfo:hover {
@@ -17,23 +9,12 @@
   text-decoration: none
 }
 
-.chats {
-  overflow: scroll;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-}
-
 .activeStyle,
 .activeStyle:hover {
   color: blue;
   text-decoration: inherit
 }
 
-.chatHeader {
-  display: flex;
-  flex-flow: row nowrap;
-  border-bottom: 1px solid rgb(128, 128, 128);
-}
 
 .avatar {
   border: 10px solid transparent;
@@ -43,33 +24,12 @@
 .chatHeaderAction {
   margin-left: auto;
 }
-
-.chatSettings {
-  background: red;
-}
-
-.content {
-  height: 100%;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-}
-
-.chatMessages {
-  height: 100%;
-  overflow: scroll;
-}
-
-.chatInputView {
-  display: flex;
-  flex-direction: row;
-}
-
 .chatScrollViewCell {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
 }
+
 
 .reverse {
   flex-flow: row-reverse nowrap;
