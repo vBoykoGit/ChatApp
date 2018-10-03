@@ -1,0 +1,16 @@
+.chats__chatInfo {
+    color: green;
+    border-bottom: 10px solid rgb(138, 15, 15);
+    text-decoration: none
+}
+
+.chats__chatInfo:hover {
+    color: black;
+}
+
+.chats__chatInfo_activeStyle,
+.chats__chatInfo_activeStyle:hover {
+    border-bottom: 10px solid rgb(138, 15, 15);
+    color: blue;
+    text-decoration: inherit
+}

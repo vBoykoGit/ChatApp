@@ -2,11 +2,11 @@ import React from "react";
 import classNames from 'classnames';
 
 export const ChatScrollViewCell = ({ message = {} }) =>
-  <div className={classNames('chatScrollViewCell', { 'reverse': message.me })}>
-    <div className='messageInfo'>
+  <div className={classNames('chatField__chatScrollViewCell', { 'reverse': message.me })}>
+    <div className='chatField__messageInfo'>
       <img
         src={require("/Users/admin/Chat/chat-app/src/resources/avatar.png")}
-        alt = ''
+        alt=''
         width="40"
         height="40"
       />

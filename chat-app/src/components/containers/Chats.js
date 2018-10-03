@@ -9,7 +9,9 @@ import { NavLink } from 'react-router-dom'
 const Chats = ({ channels = [] }) =>
   <div className="chats">
     {channels.map(channel =>
-      <NavLink key={channel._id} exact to={`/channel/${channel._id}`} className="chatInfo" activeClassName="activeStyle"><ChatInfo title={channel.title === null || channel.title === '' || channel.title === undefined ? channel.name : channel.title} /></NavLink>)}
+      <NavLink key={channel._id} exact to={`/channel/${channel._id}`} className="chats__chatInfo" activeClassName="chats__chatInfo_activeStyle">
+        <ChatInfo title={channel.title === null || channel.title === '' || channel.title === undefined ? channel.name : channel.title} />
+      </NavLink>)}
   </div>
 
 const mapStateToProps = ({
