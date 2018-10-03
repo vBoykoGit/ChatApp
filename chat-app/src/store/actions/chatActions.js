@@ -4,7 +4,6 @@ import {
 import {
     fetchThenDispatch
 } from '../fetcher.js'
-import _ from 'lodash'
 import {
     token
 } from '../../helpers/token';

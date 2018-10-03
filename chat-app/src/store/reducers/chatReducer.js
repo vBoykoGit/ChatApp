@@ -1,7 +1,6 @@
 import {
     chatConstants
 } from '../constants/chatConstants';
-import _ from 'lodash'
 
 const chat = (state = {
     channels: []
