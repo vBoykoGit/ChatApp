@@ -1,5 +1,18 @@
+@import "./chatField__date";
+@import "./chatField__message";
+@import "./chatField__name";
+
+// .chatField__messageInfo {
+//     display: flex;
+//     flex-flow: row wrap;
+//     align-items: flex-end;
+//     border: 5px solid transparent;
+//     width: 100%;
+// }
 .chatField__messageInfo {
-    display: flex;
-    flex-flow: column nowrap;
-    border: 5px solid transparent;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-auto-columns: auto  minmax(min-content, max-content);
+    grid-template-areas: "name date""message .";
 }
