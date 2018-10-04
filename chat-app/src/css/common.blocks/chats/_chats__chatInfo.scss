@@ -1,16 +1,19 @@
+@import "../../colors";
+
 .chats__chatInfo {
-    color: green;
-    border-bottom: 10px solid rgb(138, 15, 15);
+    display: block;
+    color: black;
+    border-bottom: 1px solid $commonGrey;
     text-decoration: none
 }
 
 .chats__chatInfo:hover {
-    color: black;
+    color: white;
+    background: $commonBlue;
+    text-decoration: none;
 }
 
-.chats__chatInfo_activeStyle,
-.chats__chatInfo_activeStyle:hover {
-    border-bottom: 10px solid rgb(138, 15, 15);
-    color: blue;
-    text-decoration: inherit
+.chats__chatInfo_activeStyle {
+    color: white;
+    background: $commonBlue;
 }
