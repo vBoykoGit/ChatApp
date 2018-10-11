@@ -1,5 +1,8 @@
 @import "./chatField__chatScrollViewCell";
 @import "./chatField__messageInfo";
+@import "./chatField__date.scss";
+@import "./chatField__message.scss";
+@import "./chatField__name.scss";
 
 .chatField {
     height: 100%;

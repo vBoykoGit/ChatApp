@@ -1,5 +1,5 @@
 import React from "react";
-import { ChatSettings } from "./ChatSettings";
+import { SearchBar } from "./SearchBar";
 import { Chats } from "./Chats.js";
 import {
   connect
@@ -9,7 +9,7 @@ import { withRouter } from 'react-router'
 
 const Navigation = ({ onChange }) =>
   <div className="navigation">
-    <ChatSettings onChange={onChange} />
+    <SearchBar onChange={onChange} />
     <Chats />
   </div>
 

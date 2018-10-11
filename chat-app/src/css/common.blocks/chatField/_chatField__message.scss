@@ -1,3 +1,6 @@
+@import "../../fonts/fonts";
+
 .chatField__message {
     grid-area: message;
+    @include chatFont();
 }

@@ -1,10 +1,12 @@
 @import "../../colors";
+@import "../../fonts/fonts";
 
 .chats__chatInfo {
     display: block;
     color: black;
     border-bottom: 1px solid $commonGrey;
-    text-decoration: none
+    text-decoration: none;
+    @include chatNameFont();
 }
 
 .chats__chatInfo:hover {

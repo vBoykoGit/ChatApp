@@ -11,9 +11,9 @@ export const ChatScrollViewCell = ({ message = {} }) => {
         height="40"
       />
       <div className='chatField__messageInfo'>
-        <div className='name' >{user.name}</div>
-        <div className='time'>{new Intl.DateTimeFormat("en-GB", { hour: "numeric", minute: "numeric" }).format(new Date(created))}</div>
-        <div className='message' >{body}</div>
+        <div className='chatField__name' >{user.name}</div>
+        <div className='chatField__date'>{new Intl.DateTimeFormat("en-GB", { hour: "numeric", minute: "numeric" }).format(new Date(created))}</div>
+        <div className='chatField__message' >{body}</div>
       </div>
     </div>
   )

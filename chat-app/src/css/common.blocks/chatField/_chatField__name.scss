@@ -1,3 +1,8 @@
+@import "../../colors";
+@import "../../fonts/fonts";
+
 .chatField__name {
     grid-area: name;
+    color: $messageName;
+    @include chatFont();
 }
