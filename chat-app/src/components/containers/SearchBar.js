@@ -12,8 +12,11 @@ const styles = theme => ({
   },
 })
 
-const SearchBar = ({ classes, onChange = f => f }) => <input className='navigation__searchBar' type='search'></input>
-  // <Input className='navigation__searchBar' placeholder="Search" onChange={(input) => { onChange(input.target.value) }} />
+const SearchBar = ({ classes, onChange = f => f }) =>
+  <div className='navigation__controls'>
+    <input className='navigation__searchBar' type='search'></input>
+  </div>
+// <Input className='navigation__searchBar' placeholder="Search" onChange={(input) => { onChange(input.target.value) }} />
 
 
 const styledSearchBar = withStyles(styles)(SearchBar)

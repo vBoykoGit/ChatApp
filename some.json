@@ -1,0 +1,17 @@
+{
+    "name": "Login",
+    "items": [{
+        "name": "login",
+        "type": "TextField",
+        "coordinates": "10 10 100 20"
+    }, {
+        "name": "password",
+        "type": "TextField",
+        "coordinates": "10 40 100 20"
+    }, {
+        "name": "enter",
+        "type": "Button",
+        "coordinates": "10 70 100 20",
+        "toState": "MainPage"
+    }]
+}
